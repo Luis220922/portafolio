@@ -40,7 +40,7 @@ export const projects: Project[] = [
     description: "Portafolio profesional moderno construido con React y TypeScript.",
     tags: ["React", "TypeScript", "Vite"],
     category: "Frontend",
-    github: "https://github.com",
+    github: "https://github.com/Luis220922/portafolio",
   },
   {
     id: 2,
