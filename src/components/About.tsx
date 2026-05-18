@@ -41,7 +41,7 @@ export default function About() {
           <div className="about-stats" style={{ marginTop: '32px' }}>
             {[
               { value: '4+', label: 'Proyectos acádemicos' },
-              { value: '1+', label: 'Eventos' },
+              { value: '3', label: 'Eventos' },
               { value: '3+', label: 'Años aprendiendo' },
             ].map(s => (
               <div key={s.label} className="stat-card">
