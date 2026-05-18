@@ -111,7 +111,7 @@ export const events: Event[] = [
   },
   {
     id: 3,
-    title: "GDG Pura Vida — Build with AI 2025",
+    title: "GDG Pura Vida — Build with AI 2026",
     location: "Heredia, Costa Rica (UNA)",
     date: "Mayo 2026",
     description:
