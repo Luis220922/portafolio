@@ -113,7 +113,7 @@ export const events: Event[] = [
     id: 3,
     title: "GDG Pura Vida — Build with AI 2025",
     location: "Heredia, Costa Rica (UNA)",
-    date: "2025",
+    date: "Mayo 2026",
     description:
       "Participé en el primer evento de 'Build with AI Pura Vida' celebrado en el campus de la Universidad Nacional. Fue una jornada intensiva explorando el ecosistema de Inteligencia Artificial de Google, aprendiendo de expertos sobre aplicaciones prácticas reales y conectando con entusiastas del área en sesiones interactivas.",
     image: "/build_with_ai_2025.jpg",
