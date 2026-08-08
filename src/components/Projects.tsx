@@ -1,69 +1,91 @@
 import { useState } from 'react';
-import { ExternalLink } from 'lucide-react';
 import { projects } from '../data';
+import { GithubIcon } from './icons';
 
-const GithubIcon = () => (
-  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
-  </svg>
-);
+const filters = ['Todos', 'Full Stack', 'Backend', 'IA'];
 
-const filters = ['Todos', 'Frontend', 'Backend'];
+const slug = (value: string) => value.toLowerCase().replace(/\s+/g, '-');
 
 export default function Projects() {
   const [active, setActive] = useState('Todos');
 
-  const filtered = active === 'Todos' ? projects : projects.filter(p => p.category === active);
+  const visible = active === 'Todos' ? projects : projects.filter(p => p.category === active);
 
   return (
-    <div id="projects" className="section-alt">
-      <div className="section">
-        <div className="section-header">
-          <div className="section-badge">Proyectos</div>
-          <h2>Lo que he construido</h2>
-          <p>Una selección de proyectos que demuestran mis habilidades técnicas y creatividad.</p>
-        </div>
+    <section id="projects" className="section section-sunk">
+      <div className="wrap">
+        <header className="section-head" data-reveal>
+          <span className="section-index">02</span>
+          <h2 className="display section-title">Proyectos</h2>
+          <p className="section-note">
+            Cinco proyectos, casi todos en equipo. Cada uno enlaza a su repositorio.
+          </p>
+        </header>
 
-        <div className="filter-bar">
-          {filters.map(f => (
+        <div className="filter-row" role="group" aria-label="Filtrar proyectos por área">
+          {filters.map(filter => (
             <button
-              key={f}
-              id={`filter-${f.toLowerCase()}`}
-              className={`filter-btn${active === f ? ' active' : ''}`}
-              onClick={() => setActive(f)}
+              key={filter}
+              id={`filter-${slug(filter)}`}
+              className={`filter-btn${active === filter ? ' is-active' : ''}`}
+              onClick={() => setActive(filter)}
+              aria-pressed={active === filter}
             >
-              {f}
+              {filter}
             </button>
           ))}
         </div>
 
-        <div className="projects-grid">
-          {filtered.map(project => (
-            <div key={project.id} className="glass-card project-card">
-              <div className="project-card-header">
-                <span className="tag">{project.category}</span>
+        <ol className="project-list">
+          {visible.map((project, index) => (
+            <li key={project.id} className="project">
+              <span className="project-index">{String(index + 1).padStart(2, '0')}</span>
+
+              <div className="project-body">
+                <h3 className="project-title">{project.title}</h3>
+                <p className="project-desc">{project.description}</p>
+              </div>
+
+              <div className="project-aside">
+                <span className="project-cat">{project.category}</span>
+
+                <ul className="tech-list">
+                  {project.tags.map(tag => (
+                    <li key={tag}>{tag}</li>
+                  ))}
+                </ul>
+
+                {project.status && <span className="project-status">{project.status}</span>}
+
                 <div className="project-links">
                   {project.github && (
-                    <a href={project.github} target="_blank" rel="noreferrer" aria-label="GitHub" id={`project-github-${project.id}`}>
-                      <GithubIcon />
+                    <a
+                      className="link link-arrow"
+                      href={project.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      id={`project-github-${project.id}`}
+                    >
+                      <GithubIcon size={13} /> Repositorio
                     </a>
                   )}
                   {project.demo && (
-                    <a href={project.demo} target="_blank" rel="noreferrer" aria-label="Demo" id={`project-demo-${project.id}`}>
-                      <ExternalLink size={18} />
+                    <a
+                      className="link link-arrow"
+                      href={project.demo}
+                      target="_blank"
+                      rel="noreferrer"
+                      id={`project-demo-${project.id}`}
+                    >
+                      Demo
                     </a>
                   )}
                 </div>
               </div>
-              <h3 className="project-title">{project.title}</h3>
-              <p className="project-desc">{project.description}</p>
-              <div className="project-tags">
-                {project.tags.map(t => <span key={t} className="tag">{t}</span>)}
-              </div>
-            </div>
+            </li>
           ))}
-        </div>
+        </ol>
       </div>
-    </div>
+    </section>
   );
 }

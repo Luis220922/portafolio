@@ -2,12 +2,58 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Portafolio profesional de Luis — Desarrollador TypeScript, React y Node.js. Proyectos, habilidades y experiencia académica." />
-    <meta name="keywords" content="portafolio, desarrollador, TypeScript, React, Node.js, frontend, backend" />
-    <meta name="author" content="Luis" />
-    <title>Luis.dev — Portafolio Profesional</title>
+
+    <title>Luis Rivera López — Desarrollador de software</title>
+    <meta
+      name="description"
+      content="Desarrollador de software en Costa Rica. Construyo sistemas que llegan a producción: agentes de IA con MCP y RAG, APIs en FastAPI y Spring Boot, y aplicaciones web con React y TypeScript."
+    />
+    <meta name="author" content="Luis Rivera López" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href="https://luisrivera.vercel.app/" />
+
+    <!-- Vista previa al compartir el enlace -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Luis Rivera López" />
+    <meta property="og:locale" content="es_CR" />
+    <meta property="og:url" content="https://luisrivera.vercel.app/" />
+    <meta property="og:title" content="Luis Rivera López — Desarrollador de software" />
+    <meta
+      property="og:description"
+      content="Construyo sistemas que llegan a producción: agentes de IA con MCP y RAG, APIs en FastAPI y Spring Boot, y aplicaciones web con React y TypeScript."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Luis Rivera López — Desarrollador de software" />
+    <meta
+      name="twitter:description"
+      content="Construyo sistemas que llegan a producción: agentes de IA con MCP y RAG, APIs en FastAPI y Spring Boot, y aplicaciones web con React y TypeScript."
+    />
+
+    <meta name="theme-color" content="#fbfaf8" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#131210" media="(prefers-color-scheme: dark)" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <script>
+      // Fija el tema antes del primer pintado para que no haya destello.
+      (function () {
+        var saved = localStorage.getItem('theme');
+        var theme =
+          saved === 'light' || saved === 'dark'
+            ? saved
+            : window.matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light';
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

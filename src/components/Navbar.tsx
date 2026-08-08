@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import { Moon, Sun, Menu, X } from 'lucide-react';
 
 const navLinks = [
-  { href: '#about', label: 'Sobre Mí' },
-  { href: '#skills', label: 'Habilidades' },
+  { href: '#about', label: 'Sobre mí' },
   { href: '#projects', label: 'Proyectos' },
+  { href: '#timeline', label: 'Trayectoria' },
   { href: '#events', label: 'Eventos' },
   { href: '#contact', label: 'Contacto' },
 ];
@@ -15,50 +15,60 @@ interface NavbarProps {
 }
 
 export default function Navbar({ theme, toggleTheme }: NavbarProps) {
-  const [scrolled, setScrolled] = useState(false);
+  const [stuck, setStuck] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', onScroll);
+    const onScroll = () => setStuck(window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   return (
-    <nav className={`navbar${scrolled ? ' scrolled' : ''}`}>
-      <div className="navbar-inner">
-        <a href="#" className="navbar-logo">
-          <span className="gradient-text">Luis</span>
-          <span>.dev</span>
+    <header className={`site-header${stuck ? ' is-stuck' : ''}`}>
+      <div className="wrap header-inner">
+        <a href="#top" className="wordmark">
+          Luis Rivera<span>.</span>
         </a>
 
-        <ul className="navbar-links">
+        <nav className="nav-links" aria-label="Secciones">
           {navLinks.map(link => (
-            <li key={link.href}>
-              <a href={link.href} className="navbar-link">{link.label}</a>
-            </li>
+            <a key={link.href} href={link.href} className="nav-link">
+              {link.label}
+            </a>
           ))}
-        </ul>
+        </nav>
 
-        <div className="navbar-actions">
-          <button id="theme-toggle" className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
-            {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+        <div className="header-actions">
+          <button
+            className="icon-btn"
+            onClick={toggleTheme}
+            aria-label={theme === 'dark' ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro'}
+          >
+            {theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}
           </button>
-          <button id="menu-toggle" className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
-            {menuOpen ? <X size={22} /> : <Menu size={22} />}
+          <button
+            className="icon-btn menu-btn"
+            onClick={() => setMenuOpen(open => !open)}
+            aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-nav"
+          >
+            {menuOpen ? <X size={19} /> : <Menu size={19} />}
           </button>
         </div>
       </div>
 
       {menuOpen && (
-        <div className="mobile-menu">
+        <nav className="mobile-nav" id="mobile-nav" aria-label="Secciones">
           {navLinks.map(link => (
-            <a key={link.href} href={link.href} className="mobile-link" onClick={() => setMenuOpen(false)}>
+            <a key={link.href} href={link.href} onClick={() => setMenuOpen(false)}>
               {link.label}
             </a>
           ))}
-        </div>
+        </nav>
       )}
-    </nav>
+    </header>
   );
 }

@@ -1,47 +1,45 @@
-import { MapPin, Calendar } from 'lucide-react';
 import { events } from '../data';
 
 export default function Events() {
   return (
-    <section id="events" className="section">
-      <div className="section-header">
-        <div className="section-badge">Eventos</div>
-        <h2>Experiencias y Eventos</h2>
-        <p>Conferencias, congresos y eventos académicos que han enriquecido mi trayectoria profesional.</p>
-      </div>
+    <section id="events" className="section section-sunk">
+      <div className="wrap">
+        <header className="section-head" data-reveal>
+          <span className="section-index">04</span>
+          <h2 className="display section-title">Eventos</h2>
+          <p className="section-note">
+            Congresos y encuentros de la comunidad tecnológica a los que he asistido.
+          </p>
+        </header>
 
-      <div className="events-grid">
-        {events.map(event => (
-          <article key={event.id} className="glass-card event-card">
-            <div className="event-image-wrapper">
-              <img
-                src={event.image}
-                alt={event.title}
-                className="event-image"
-                loading="lazy"
-                style={{ objectPosition: event.objectPosition }}
-              />
-              <div className="event-image-overlay" />
-            </div>
-            <div className="event-body">
-              <div className="event-meta">
-                <span className="event-meta-item">
-                  <MapPin size={14} />
-                  {event.location}
-                </span>
-                <span className="event-meta-item">
-                  <Calendar size={14} />
-                  {event.date}
-                </span>
+        <ol data-reveal>
+          {events.map(event => (
+            <li key={event.id} className="event">
+              <figure className="event-figure">
+                <img
+                  src={event.image}
+                  alt={event.title}
+                  loading="lazy"
+                  decoding="async"
+                  style={{ objectPosition: event.objectPosition }}
+                />
+              </figure>
+
+              <div className="event-body">
+                <p className="event-meta">
+                  <span>{event.date}</span> — {event.location}
+                </p>
+                <h3 className="event-title">{event.title}</h3>
+                <p className="event-desc">{event.description}</p>
+                <ul className="tech-list">
+                  {event.tags.map(tag => (
+                    <li key={tag}>{tag}</li>
+                  ))}
+                </ul>
               </div>
-              <h3 className="event-title">{event.title}</h3>
-              <p className="event-desc">{event.description}</p>
-              <div className="event-tags">
-                {event.tags.map(t => <span key={t} className="tag">{t}</span>)}
-              </div>
-            </div>
-          </article>
-        ))}
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   );
